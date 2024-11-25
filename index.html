@@ -20,6 +20,9 @@
     <a-assets>
       <a-asset-item id="modelo" src="dragon_ball_z_tien.glb"></a-asset-item>
       <a-asset-item id="modelo2" src="dragon_radar_dragon_ball.glb"></a-asset-item>
+      <a-asset-item id="modelo3" src="capsule_corp.glb"></a-asset-item>
+      <a-asset-item id="modelo4" src="the_dragon_balls.glb"></a-asset-item>
+      <a-asset-item id="modelo5" src="vegeta_manga_dimensions.glb"></a-asset-item>
     </a-assets>
 
     <!-- Primer marcador -->
@@ -30,10 +33,13 @@
       emitevents="true" 
       cursor="fuse: false; rayOrigin: mouse;">
       <a-entity 
-        gltf-model="#modelo" scale="0.16214 0.16214 0.16214" class="clickable" gesture-handler="" visible="">
+        gltf-model="#modelo" 
+        scale="0.16214 0.16214 0.16214" 
+        class="clickable" 
+        gesture-handler>
       </a-entity>
     </a-marker>
-      </a-entity>
+
     <!-- Segundo marcador -->
     <a-marker 
       type="barcode" 
@@ -43,10 +49,54 @@
       cursor="fuse: false; rayOrigin: mouse;">
       <a-entity 
         gltf-model="#modelo2" 
-         scale="0.01935 0.01933 0.01933" 
-        class="clickable"
-        gesture-handler="">
-    
+        scale="0.01935 0.01935 0.01935" 
+        class="clickable" 
+        gesture-handler>
+      </a-entity>
+    </a-marker>
+
+    <!-- Tercer marcador -->
+    <a-marker 
+      type="barcode" 
+      value="45" 
+      raycaster="objects: .clickable" 
+      emitevents="true" 
+      cursor="fuse: false; rayOrigin: mouse;">
+      <a-entity 
+        gltf-model="#modelo3" 
+        scale="0.16214 0.16214 0.16214"
+        class="clickable" 
+        gesture-handler>
+      </a-entity>
+    </a-marker>
+
+    <!-- Cuarto marcador -->
+    <a-marker 
+      type="barcode" 
+      value="30" 
+      raycaster="objects: .clickable" 
+      emitevents="true" 
+      cursor="fuse: false; rayOrigin: mouse;">
+      <a-entity 
+        gltf-model="#modelo4" 
+        scale="0.16214 0.16214 0.16214" 
+        class="clickable" 
+        gesture-handler>
+      </a-entity>
+    </a-marker>
+
+    <!-- Quinto marcador -->
+    <a-marker 
+      type="barcode" 
+      value="63" 
+      raycaster="objects: .clickable" 
+      emitevents="true" 
+      cursor="fuse: false; rayOrigin: mouse;">
+      <a-entity 
+        gltf-model="#modelo5" 
+        scale="0.16214 0.16214 0.16214" 
+        class="clickable" 
+        gesture-handler>
       </a-entity>
     </a-marker>
 
@@ -54,3 +104,4 @@
   </a-scene>
 </body>
 </html>
+
