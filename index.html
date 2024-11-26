@@ -19,10 +19,13 @@
 
     <a-assets>
       <a-asset-item id="modelo" src="dragon_ball_z_tien.glb"></a-asset-item>
-      <a-asset-item id="modelo2" src="dragon_radar_dragon_ball.glb"></a-asset-item>
+      <a-asset-item id="modelo2" src="dragon_radar_dragon_ball.glb" timeout="10000"></a-asset-item>
       <a-asset-item id="modelo3" src="dragon_ball_z_super_saiyan_vegeta.glb"></a-asset-item>
-      <a-asset-item id="modelo4" src="the_dragon_balls.glb"></a-asset-item>
+      <a-asset-item id="modelo4" src="the_dragon_balls.glb" timeout="10000"></a-asset-item>
       <a-asset-item id="modelo5" src="capsule_corp.glb"></a-asset-item>
+
+      <audio id="audioradar" src="y2mate.com - Sonido del radar del dragon.mp3" preload="auto"></audio>
+      <audio id="audioball" src="y2mate.com - DBS Shenron Sound Effects.mp3" preload="auto"></audio>
     </a-assets>
 
     <!-- Primer marcador -->
@@ -33,10 +36,8 @@
       emitevents="true" 
       cursor="fuse: false; rayOrigin: mouse;">
       <a-entity 
-        gltf-model="#modelo" 
-        scale="0.16214 0.16214 0.16214" 
-        class="clickable" 
-        gesture-handler="">
+         gltf-model="#modelo" scale="0.11193 0.11193 0.11193" class="clickable" gesture-handler="">
+        </a-entity>
       </a-entity>
     </a-marker>
 
@@ -48,10 +49,8 @@
       emitevents="true" 
       cursor="fuse: false; rayOrigin: mouse;">
       <a-entity 
-        gltf-model="#modelo2" 
-        scale="0.01935 0.01933 0.01933" 
-        class="clickable" 
-        gesture-handler="">
+        gltf-model="#modelo2" scale="0.01935 0.01933 0.01933" class="clickable" gesture-handler=""
+        sound="src: #audioradar; autoplay: false; volume 1">
       </a-entity>
     </a-marker>
 
@@ -63,10 +62,8 @@
       emitevents="true" 
       cursor="fuse: false; rayOrigin: mouse;">
       <a-entity 
-        gltf-model="#modelo3" 
-        scale="0.01935 0.01933 0.01933" 
-        class="clickable" 
-        gesture-handler="">
+       gltf-model="#modelo3" scale="0.0533 0.053 0.0533" class="clickable" gesture-handler="" >
+    
       </a-entity>
     </a-marker>
 
@@ -78,10 +75,8 @@
       emitevents="true" 
       cursor="fuse: false; rayOrigin: mouse;">
       <a-entity 
-        gltf-model="#modelo4" 
-        scale="0.01935 0.01933 0.01933" 
-        class="clickable" 
-        gesture-handler="">
+      gltf-model="#modelo4" scale="-0.06747 -0.06747 -0.06747" class="clickable" gesture-handler=""
+      sound="src: #audioball; autoplay: false; volume: 1">
       </a-entity>
     </a-marker>
 
@@ -93,15 +88,49 @@
       emitevents="true" 
       cursor="fuse: false; rayOrigin: mouse;">
       <a-entity 
-        gltf-model="#modelo5" 
-        scale="0.01935 0.01933 0.01933" 
-        class="clickable" 
-        gesture-handler="">
+      gltf-model="#modelo5" scale="0.022 0.022 0.022" class="clickable" gesture-handler="" visible="">
+    
       </a-entity>
     </a-marker>
 
     <!-- Cámara -->
     <a-entity camera></a-entity>
   </a-scene>
+  <script>
+       var audioRadar = document.getElementById('audioradar');
+    var audioBall = document.getElementById('audioball');
+
+    function stopAllAudio() {
+      [audioRadar, audioBall].forEach(audio => {
+        if (audio) {
+          audio.pause();
+          audio.currentTime = 0; // Reinicia el audio al inicio
+        }
+      });
+    }
+
+    // Control de audio para el marcador 24
+    document.querySelector('[value="24"]').addEventListener('markerFound', function () {
+      stopAllAudio();
+      audioRadar?.play();
+    });
+
+    document.querySelector('[value="24"]').addEventListener('markerLost', function () {
+      audioRadar?.pause();
+      audioRadar.currentTime = 0;
+    });
+
+    // Control de audio para el marcador 45
+    document.querySelector('[value="45"]').addEventListener('markerFound', function () {
+      stopAllAudio();
+      audioBall?.play();
+    });
+
+    document.querySelector('[value="45"]').addEventListener('markerLost', function () {
+      audioBall?.pause();
+      audioBall.currentTime = 0;
+    });
+  </script>
 </body>
 </html>
+
