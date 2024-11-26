@@ -26,6 +26,8 @@
 
       <audio id="audioradar" src="y2mate.com - Sonido del radar del dragon.mp3" preload="auto"></audio>
       <audio id="audioball" src="y2mate.com - DBS Shenron Sound Effects.mp3" preload="auto"></audio>
+      <audio id="audioOpening1" src="/mnt/data/Dragon Ball Super - Opening 1 Español Latino (OFICIAL) - Cartoon Network Chozetsu Dynamic 2021.mp3" preload="auto"></audio>
+      <audio id="audioOpening2" src="/mnt/data/Dragon Ball Z opening 2 Latino (1080p HD) (1).mp3" preload="auto"></audio>
     </a-assets>
 
     <!-- Primer marcador -->
@@ -36,8 +38,8 @@
       emitevents="true" 
       cursor="fuse: false; rayOrigin: mouse;">
       <a-entity 
-         gltf-model="#modelo" scale="0.11193 0.11193 0.11193"  position="0.161 0.027 0.410" rotation="-4.764 18.272 18.756"  class="clickable" gesture-handler="">
-        </a-entity>
+         gltf-model="#modelo" scale="0.11193 0.11193 0.11193"  position="0.161 0.027 0.410" rotation="-4.764 18.272 18.756"  class="clickable" gesture-handler=""
+         sound="src: #audioOpening1; autoplay: false; volume: 1">
       </a-entity>
     </a-marker>
 
@@ -62,8 +64,8 @@
       emitevents="true" 
       cursor="fuse: false; rayOrigin: mouse;">
       <a-entity 
-       gltf-model="#modelo3" scale="0.0533 0.053 0.0533" position="0.117 0.252 0.479" rotation="-20.027 14.129 6.120"  posclass="clickable" gesture-handler="" >
-    
+       gltf-model="#modelo3" scale="0.0533 0.053 0.0533" position="0.117 0.252 0.479" rotation="-20.027 14.129 6.120" class="clickable" gesture-handler=""
+       sound="src: #audioOpening2; autoplay: false; volume: 1">
       </a-entity>
     </a-marker>
 
@@ -88,8 +90,7 @@
       emitevents="true" 
       cursor="fuse: false; rayOrigin: mouse;">
       <a-entity 
-      gltf-model="#modelo5" scale="0.022 0.022 0.022" class="clickable" gesture-handler="" visible="">
-    
+      gltf-model="#modelo5" scale="0.022 0.022 0.022" class="clickable" gesture-handler="">
       </a-entity>
     </a-marker>
 
@@ -99,15 +100,28 @@
   <script>
        var audioRadar = document.getElementById('audioradar');
     var audioBall = document.getElementById('audioball');
+    var audioOpening1 = document.getElementById('audioOpening1');
+    var audioOpening2 = document.getElementById('audioOpening2');
 
     function stopAllAudio() {
-      [audioRadar, audioBall].forEach(audio => {
+      [audioRadar, audioBall, audioOpening1, audioOpening2].forEach(audio => {
         if (audio) {
           audio.pause();
           audio.currentTime = 0; // Reinicia el audio al inicio
         }
       });
     }
+
+    // Control de audio para el marcador 10
+    document.querySelector('[value="10"]').addEventListener('markerFound', function () {
+      stopAllAudio();
+      audioOpening1?.play();
+    });
+
+    document.querySelector('[value="10"]').addEventListener('markerLost', function () {
+      audioOpening1?.pause();
+      audioOpening1.currentTime = 0;
+    });
 
     // Control de audio para el marcador 24
     document.querySelector('[value="24"]').addEventListener('markerFound', function () {
@@ -118,6 +132,17 @@
     document.querySelector('[value="24"]').addEventListener('markerLost', function () {
       audioRadar?.pause();
       audioRadar.currentTime = 0;
+    });
+
+    // Control de audio para el marcador 30
+    document.querySelector('[value="30"]').addEventListener('markerFound', function () {
+      stopAllAudio();
+      audioOpening2?.play();
+    });
+
+    document.querySelector('[value="30"]').addEventListener('markerLost', function () {
+      audioOpening2?.pause();
+      audioOpening2.currentTime = 0;
     });
 
     // Control de audio para el marcador 45
@@ -133,5 +158,3 @@
   </script>
 </body>
 </html>
-
-
